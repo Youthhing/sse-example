@@ -1,11 +1,10 @@
 package com.youth.sse.domain.service;
 
 import com.youth.sse.domain.entity.Quiz;
+import com.youth.sse.domain.entity.QuizStatus;
 import com.youth.sse.domain.repository.QuizRepository;
 import com.youth.sse.web.dto.AddQuizzesRequest;
 import com.youth.sse.web.dto.QuizResponse;
-import jakarta.validation.Valid;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,5 +29,11 @@ public class QuizService {
     public QuizResponse findQuiz(Long quizId) {
         Quiz findQuiz = quizRepository.findById(quizId).orElseThrow();
         return QuizResponse.from(findQuiz);
+    }
+
+    @Transactional
+    public void openQuiz(Long quizId) {
+        Quiz quiz = quizRepository.findById(quizId).orElseThrow();
+        quiz.updateStatus(QuizStatus.OPEN);
     }
 }

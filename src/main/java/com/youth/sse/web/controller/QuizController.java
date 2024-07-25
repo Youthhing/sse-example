@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,5 +31,11 @@ public class QuizController {
     @GetMapping("/{quiz-id}")
     public ResponseEntity<QuizResponse> findQuiz(@PathVariable("quiz-id") Long quizId) {
         return ResponseEntity.ok().body(quizService.findQuiz(quizId));
+    }
+
+    @PatchMapping("/{quiz-id}/open")
+    public ResponseEntity<Void> openQuiz(@PathVariable("quiz-id") Long quizId) {
+        quizService.openQuiz(quizId);
+        return ResponseEntity.noContent().build();
     }
 }
