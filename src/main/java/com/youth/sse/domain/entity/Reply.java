@@ -26,6 +26,12 @@ public class Reply {
     @Column(name = "ticket_number", nullable = false)
     private Long ticketNumber;
 
+    @Column(name = "reply_answer", nullable = false)
+    private String answer;
+
+    @Column(name = "is_correct", nullable = false)
+    private Boolean isCorrect;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quiz_id")
     private Quiz quiz;
@@ -34,9 +40,11 @@ public class Reply {
     private Long userId;
 
     @Builder
-    public Reply(Long ticketNumber, Quiz quiz, Long userId) {
+    public Reply(Long ticketNumber, Quiz quiz, String answer, Boolean isCorrect, Long userId) {
         this.ticketNumber = ticketNumber;
         this.quiz = quiz;
+        this.answer = answer;
+        this.isCorrect = isCorrect;
         this.userId = userId;
     }
 }
