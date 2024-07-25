@@ -7,7 +7,7 @@ spring:
       hibernate:
         format_sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: ${DDL_AUTO}
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
