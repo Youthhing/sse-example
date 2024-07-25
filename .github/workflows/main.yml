@@ -77,3 +77,5 @@ jobs:
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/sse-spring:1.0.2
             docker stop sse-example || true
             docker run -d --rm --name sse-example -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/sse-spring:1.0.2
+            docker-compose pull
+            docker-compose up -d
