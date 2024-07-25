@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  server:
+    image: youthing/sse-spring:latest
+    container_name: sse-example
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_REDIS_HOST=redis
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  redis_data:
