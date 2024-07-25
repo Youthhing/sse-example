@@ -6,6 +6,7 @@ import java.util.List;
 
 public record AddQuizzesRequest(
         @Valid
+        @NotNull
         List<QuizRequest> quizzes
 ) {
 
