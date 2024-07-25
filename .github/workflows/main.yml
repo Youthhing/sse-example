@@ -67,6 +67,15 @@ jobs:
 
     steps:
        # [0] docker compose 파일을 서버에 올린다.
+      - name: Check if docker-compose.yml exists
+        run: |
+          if [ -f ./docker-compose.yml ]; then
+            echo "docker-compose.yml exists."
+          else
+            echo "docker-compose.yml does not exist."
+            exit 1
+          fi
+
       - name: Copy docker-compose.yml to server
         uses: appleboy/scp-action@v0.1.0
         with:
