@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   server:
-    image: youthing/sse-spring:latest
+    image: youthing/sse-spring:1.0.2
     container_name: sse-example
     ports:
       - "8080:8080"
