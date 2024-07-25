@@ -81,8 +81,10 @@ jobs:
           script: |
             cd /home/ubuntu
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/sse-spring:1.0.2
-            docker stop sse-example || true
-            docker rm sse-example || true
-            docker run -d --rm --name sse-example -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/sse-spring:1.0.2
+#            docker stop sse-example || true
+#            docker rm -f sse-example || true
+#            docker run -d --rm --name sse-example -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/sse-spring:1.0.2
+            docker-compose down
             docker-compose pull
             docker-compose up -d
+            docker image prune -f
