@@ -3,6 +3,7 @@ package com.youth.sse.web.controller;
 import com.youth.sse.domain.service.EducationService;
 import com.youth.sse.web.dto.AddEducationRequest;
 import com.youth.sse.web.dto.OpenEducationRequest;
+import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -25,7 +26,7 @@ public class EducationController {
     }
 
     @PatchMapping("/open")
-    public ResponseEntity<Void> updateStatus(@RequestBody OpenEducationRequest request) {
+    public ResponseEntity<Void> openEducation(@RequestBody OpenEducationRequest request) throws IOException {
         educationService.open(request.educationId());
         return ResponseEntity.ok().build();
     }
