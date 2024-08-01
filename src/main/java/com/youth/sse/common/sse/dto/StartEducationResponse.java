@@ -7,6 +7,7 @@ import lombok.Builder;
 public record StartEducationResponse(
         Long educationId,
         Long educationNumber,
-        EducationStatus status
+        EducationStatus status,
+        Long participants
 ) {
 }

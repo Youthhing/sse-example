@@ -4,6 +4,7 @@ import com.youth.sse.common.sse.SseService;
 import com.youth.sse.common.sse.dto.StartEducationResponse;
 import com.youth.sse.domain.entity.Education;
 import com.youth.sse.domain.enums.EducationStatus;
+import com.youth.sse.domain.redis.JoinCountRedisRepository;
 import com.youth.sse.domain.repository.EducationRepository;
 import com.youth.sse.web.dto.AddEducationRequest;
 import java.io.IOException;
@@ -19,6 +20,8 @@ public class EducationService {
     private static final String START_EDUCATION = "EducationOpen";
     private final EducationRepository educationRepository;
     private final SseService sseService;
+    private final JoinCountRedisRepository joinCountRedisRepository;
+
     @Transactional
     public void addEducation(AddEducationRequest request) {
         educationRepository.save(Education.builder()
@@ -34,12 +37,14 @@ public class EducationService {
 
         findEducation.updateStatus(EducationStatus.OPEN);
 
+
         sseService.send(SseEmitter.event()
                 .name(START_EDUCATION)
                 .data(StartEducationResponse.builder()
                         .educationId(findEducation.getId())
                         .educationNumber(findEducation.getNumber())
                         .status(findEducation.getStatus())
+                        .participants(joinCountRedisRepository.increment(findEducation.getId()))
                         .build())
                 .build());
     }
