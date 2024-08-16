@@ -17,7 +17,15 @@ public class SseService {
 
     private final List<SseEmitter> sseEmitters = new CopyOnWriteArrayList<>();
 
-    public SseEmitter add(SseEmitter emitter) {
+    public SseEmitter add() throws IOException {
+
+        SseEmitter emitter = new SseEmitter();
+
+        emitter.send(SseEmitter.event()
+                .name("education")
+                .data("connected")
+                .build());
+
         this.sseEmitters.add(emitter);
 
         emitter.onCompletion(() -> {

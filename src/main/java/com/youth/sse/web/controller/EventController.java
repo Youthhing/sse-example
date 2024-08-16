@@ -23,13 +23,7 @@ public class EventController {
     @Operation(summary = "교육 시작 이벤트 구독 API")
     @GetMapping(value = "/education", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public ResponseEntity<SseEmitter> subscribeEducation() throws IOException {
-        SseEmitter sseEmitter = new SseEmitter();
 
-        sseEmitter.send(SseEmitter.event()
-                .name("education")
-                .data("connected")
-                .build());
-
-        return ResponseEntity.ok().body(sseService.add(sseEmitter));
+        return ResponseEntity.ok().body(sseService.add());
     }
 }
